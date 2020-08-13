@@ -1,6 +1,7 @@
 ﻿/// <binding beforebuild="process:less"></binding>
 var gulp = require('gulp'),
     less = require('gulp-less'),
+    ts = require('gulp-typescript'),
     babel = require('gulp-babel'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
@@ -16,6 +17,10 @@ var paths = {
     scripts: {
         src: 'Scripts/**/*.js',
         dest: './wwwroot//scripts'
+    },
+    typescript: {
+        src: 'Scripts/Typescript/**/*.ts',
+        dest: 'Scripts/'
     }
 };
 
@@ -52,15 +57,27 @@ function scripts() {
         .pipe(gulp.dest(paths.scripts.dest));
 }
 
+function typescript() {
+    return gulp.src(paths.typescript.src, { sourcemaps: true })
+        .pipe(ts({
+            strict: true,
+            noImplicitAny: true,
+            noEmitOnError: true,
+            removeComments: true
+        }))
+        .pipe(gulp.dest(paths.typescript.dest));
+}
+
 function watch() {
     gulp.watch(paths.scripts.src, scripts);
+    gulp.watch(paths.typescript.src, typescript);
     gulp.watch(paths.styles.src, styles);
 }
 
 /*
  * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
-var build = gulp.series(clean, gulp.parallel(styles, scripts));
+var build = gulp.series(clean, gulp.parallel(styles, scripts, typescript));
 
 /*
  * You can use CommonJS `exports` module notation to declare tasks
@@ -68,6 +85,7 @@ var build = gulp.series(clean, gulp.parallel(styles, scripts));
 exports.clean = clean;
 exports.styles = styles;
 exports.scripts = scripts;
+exports.typescript = typescript;
 exports.watch = watch;
 exports.build = build;
 /*
