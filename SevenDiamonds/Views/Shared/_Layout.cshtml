@@ -4,46 +4,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SevenDiamonds</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/main.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SevenDiamonds</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <header class="header">
+        <div class="header-inner">
+            <a class="header-icon" asp-area="" asp-controller="Home" asp-action="Index">Seven Diamonds</a>
+            <nav class="header-nav">
+                <a class="header-nav-item" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="header-nav-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <a class="header-nav-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <a class="header-nav-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </nav>
+            <div style="color: #EEE;" onclick="openNav()">open</div>
+        </div>
     </header>
-    <div class="container">
+
+    <div id="sideNavigation" class="nav-side">
+        <a href="javascript:void(0)" class="btn-close" onclick="closeNav()">close</a>
+        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+
+    <div class="content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - SevenDiamonds - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer">
+        <div class="footer-inner">
+            <a>Join our community on discord</a>
+            @*<div>
+                    <a>1</a>
+                    <a>2</a>
+                    <a>3</a>
+                    <a>4</a>
+                    <a>5</a>
+                </div>*@
+            <div class="copyrights">&copy; 2020 - Seven Diamonds</div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/scripts/main.min.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
